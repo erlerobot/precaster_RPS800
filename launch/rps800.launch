@@ -1,0 +1,8 @@
+<launch>
+
+  <node name="precaster_rangefinder_rps800" pkg="precaster_rangefinder_rps800" type="rps800">
+    <param name="baudrate" type="int" value="230400" />
+    <param name="port" type="string" value="/dev/ttyAMA0" />
+  </node>
+
+</launch>
