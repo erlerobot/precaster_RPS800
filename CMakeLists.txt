@@ -1,30 +1,46 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(precaster_rangefinder_rps800)
 
-## Find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs std_msgs serial)
+project(precaster_rps800)
 
-## Declare a catkin package
-catkin_package()
+if(NOT WIN32)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
+endif()
 
-## Build talker and listener
-include_directories(include ${catkin_INCLUDE_DIRS})
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(serial REQUIRED)
 
-add_executable(rps800 src/main.cpp src/RPS800.cpp)
-target_link_libraries(rps800 ${catkin_LIBRARIES})
-add_dependencies(rps800 precaster_rangefinder_rps800)
+macro(targets)
+	if(NOT "${target_suffix} " STREQUAL " ")
+		get_rclcpp_information("${rmw_implementation}" "rclcpp${target_suffix}")
+	endif()
 
-add_executable(rps800_listener src/rps800_listener.cpp)
-target_link_libraries(rps800_listener ${catkin_LIBRARIES})
-add_dependencies(rps800_listener precaster_rangefinder_rps800)
+	add_executable(precaster_rps800${target_suffix}
+		src/main.cpp
+		src/RPS800.cpp
+	)
+	ament_target_dependencies(precaster_rps800${target_suffix}
+	  "rclcpp${target_suffix}"
+	  "sensor_msgs"
+	  "serial"
+	)
 
+	add_executable(precaster_rps800_listener${target_suffix}
+		src/rps800_listener.cpp
+	)
+	ament_target_dependencies(precaster_rps800_listener${target_suffix}
+	  "rclcpp${target_suffix}"
+	  "sensor_msgs"
+	)
 
-install(
-	TARGETS rps800 rps800_listener
-	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+	install(TARGETS
+			precaster_rps800${target_suffix}
+			precaster_rps800_listener${target_suffix}
+		  	DESTINATION bin)
+endmacro()
 
-install(DIRECTORY launch/
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
-PATTERN ".git" EXCLUDE)
+call_for_each_rmw_implementation(targets GENERATE_DEFAULT)
+
+ament_package()

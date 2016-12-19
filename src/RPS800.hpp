@@ -2,8 +2,9 @@
 #define RPS800_H
 
 #include <serial/serial.h>
-#include <ros/ros.h>
-#include <sensor_msgs/Range.h>
+
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/range.hpp>
 
 #include <string>
 #include <iostream>
@@ -14,11 +15,14 @@
 class RPS800
 {
 public:
-  RPS800(std::string port, unsigned long baud);
-  void read_message();
+  RPS800(std::string port,
+         unsigned long baud,
+         std::shared_ptr<rclcpp::node::Node> node);
+
+  void read_and_send_message();
 
 private:
-  ros::Publisher rangefinder_pub;
+  rclcpp::publisher::Publisher<sensor_msgs::msg::Range>::SharedPtr rangefinder_pub;
   serial::Serial my_serial;
 };
 

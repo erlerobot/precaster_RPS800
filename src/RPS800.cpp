@@ -1,6 +1,6 @@
 #include "RPS800.hpp"
 
-RPS800::RPS800(std::string port, unsigned long baud)
+RPS800::RPS800(std::string port, unsigned long baud, std::shared_ptr<rclcpp::node::Node> node)
  :my_serial(port,
             baud,
             serial::Timeout::simpleTimeout(1000),
@@ -14,11 +14,10 @@ RPS800::RPS800(std::string port, unsigned long baud)
   else
     std::cout << " No." << std::endl;
 
-  ros::NodeHandle n;
-  rangefinder_pub = n.advertise<sensor_msgs::Range>("range", 1);
+  rangefinder_pub = node->create_publisher<sensor_msgs::msg::Range>("range", rmw_qos_profile_sensor_data);
 }
 
-void RPS800::read_message()
+void RPS800::read_and_send_message()
 {
 
   std::string result = my_serial.read(1);
@@ -58,14 +57,14 @@ void RPS800::read_message()
                 else if(read_bytes[2]==0x06) printf(" Out of working temperature\n");
 		else printf("\n");
 */
-    sensor_msgs::Range range_msgs;
+    sensor_msgs::msg::Range range_msgs;
     range_msgs.radiation_type = 1; //INFRARED
     range_msgs.field_of_view = 0;
     range_msgs.min_range = 0.1;
     range_msgs.max_range = 5.0;
     range_msgs.range = distance/1000.0;
 
-    rangefinder_pub.publish(range_msgs);
+    rangefinder_pub->publish(range_msgs);
 	}
   return;
 }

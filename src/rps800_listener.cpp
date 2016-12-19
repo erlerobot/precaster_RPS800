@@ -1,21 +1,20 @@
-#include <ros/ros.h>
-#include <sensor_msgs/Range.h>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/range.hpp>
 
-void chatterCallback(const sensor_msgs::Range::ConstPtr& msg)
+void cb_range(const sensor_msgs::msg::Range::SharedPtr msg)
 {
-	ROS_INFO("I heard: [%.2f]", msg->range);
+  printf("Distance: [%+6.3f]\n", msg->range);
 }
 
-int main(int argc, char **argv)
+int main(int argc, char ** argv)
 {
+  rclcpp::init(argc, argv);
 
-  ros::init(argc, argv, "precaster_rps800_listener");
+  auto node = rclcpp::Node::make_shared("precaster_rps800_rangefinder_listener");
 
-  ros::NodeHandle n;
-
-  ros::Subscriber sub = n.subscribe("range", 1, chatterCallback);
-
-  ros::spin();
+  auto sub = node->create_subscription<sensor_msgs::msg::Range>(
+    "range", cb_range, rmw_qos_profile_sensor_data);
+  rclcpp::spin(node);
 
   return 0;
 }
