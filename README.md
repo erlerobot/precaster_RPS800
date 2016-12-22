@@ -26,7 +26,7 @@ sudo chmod a+rw /dev/ttyAMA0
 
 ## Compiling the code
 
-Clone this repository in a ROS workspace
+Clone this repository in a ROS workspace or [create a new one](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 
 ```
 cd ~/ros_catkin_ws/src
