@@ -24,6 +24,21 @@ If **XX** is `--`: the rangefinder is not configured properly and you need to:
 sudo chmod a+rw /dev/ttyAMA0
 ```
 
+## Compiling the code
+
+Clone this repository in a ROS workspace
+
+```
+cd ~/ros_catkin_ws/src
+git clone https://github.com/erlerobot/precaster_rangefinder
+```
+Now compile the code:
+
+```
+cd ~/ros_catkin_ws/
+catkin_make_isolated --install --pkg precaster_rangefinder_rps800
+```
+
 ## Launching manually
 ### Starting a roscore
 
