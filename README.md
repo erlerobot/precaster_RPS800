@@ -1,3 +1,26 @@
+## precaster_rps800 (indigo) - 0.1.1-0
+
+The packages in the `precaster_rps800` repository were released into the `indigo` distro by running `/usr/local/bin/bloom-release --rosdistro indigo --track indigo precaster_rps800` on `Thu, 22 Dec 2016 15:06:37 -0000`
+
+The `precaster_rangefinder_rps800` package was released.
+
+Version of package(s) in repository `precaster_rps800`:
+
+- upstream repository: https://github.com/erlerobot/precaster_RPS800
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.1.1-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.23`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.5`
+- rosdistro version: `0.5.0`
+- vcstools version: `0.1.39`
+
+
 - [Precaster Rangefinder RPS800](#precaster-rangefinder-rps800)
  - [Features](#features)
  - [Applications](#applications)
