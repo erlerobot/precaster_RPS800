@@ -1,0 +1,16 @@
+ros-indigo-precaster-rangefinder-rps800 (0.1.1-0saucy) saucy; urgency=high
+
+  * Included index
+  * Included sensor information
+  * beginner tips
+  * Included compiling instructions
+  * Update README.md
+  * Including launch file
+  * Updated code and added listener
+  * Read data from the sensor
+  * first commit
+  * Contributors: ahcorde
+
+ -- Alejandro Hernandez <alex@erlerobotics.com>  Wed, 21 Dec 2016 23:00:00 -0000
+
+
