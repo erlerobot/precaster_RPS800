@@ -1,4 +1,16 @@
-# precaster_rangefinder_rps800
+- [Precaster Rangefinder RPS800](#precaster-rangefinder-rps800)
+ - [Features](#features)
+ - [Applications](#applications)
+ - [Technical data](#technical-data)
+- [Configuring precaster rangefinder rps800](#configuring-precaster-rangefinder-rps800)
+- [Compiling the code from sources](#compiling-the-code-from-sources)
+- [Launching manually](#launching-manually)
+ - [Starting a roscore](#starting-a-roscore)
+ - [Setting Parameters](#setting-parameters)
+ - [Running the precaster rangefinder rps800 node](#running-the-precaster-rangefinder-rps800-node)
+- [Launch file](#launch-file)
+
+# Precaster rangefinder RPS800
 
 [RPS800](https://www.precaster.com.tw/predustrial/rps800/) is designed as a compact and reliable laser distance measuring sensor. The pulse technology gives the good accuracy and response time in distance measuring and a stable output under the strong ambient light.
 
@@ -64,7 +76,7 @@ If **XX** is `--`: the rangefinder is not configured properly and you need to:
 sudo chmod a+rw /dev/ttyAMA0
 ```
 
-## Compiling the code
+## Compiling the code from sources
 
 Clone this repository in a ROS workspace or [create a new one](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 
